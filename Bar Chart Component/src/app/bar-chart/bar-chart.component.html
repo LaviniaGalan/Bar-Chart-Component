@@ -1,0 +1,35 @@
+<dialog #myDialog>
+  <div class="centered" id="dataDescription"></div>
+  <br>
+  <button class="dialogButton" (click)="myDialog.close()">
+    OK
+  </button>
+</dialog>
+
+
+<div class="myChart" *ngIf="isVertical">
+  <div class="content">
+    <div class="bars" *ngFor="let item of data; let i = index" [attr.data-index]="i">
+      <span>{{item.value}}</span>
+      <div class="verticalBar" [style.background-color]="item.color"
+           [style.height]="item.size" (click)="setDescription(i); myDialog.show()"></div>
+    </div>
+  </div>
+  <div class="line" [style.width]="lineWidth"></div>
+  <div class="nameLabels">
+    <span *ngFor="let item of data">{{item.label}}</span>
+  </div>
+</div>
+
+<div class="hChart" *ngIf="!isVertical">
+  <div class="hBars" *ngFor="let item of data; let i = index" [attr.data-index]="i">
+    <div class="hBarLabel">{{ item.label }}:</div>
+    <div class="hBarContainer">
+      <div class="hBar" [style.width]="item.size" [style.background-color]="item.color"
+           (click)="setDescription(i); myDialog.show()"></div>
+    </div>
+    <div>{{item.value}}</div>
+  </div>
+</div>
+
+
